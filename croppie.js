@@ -1330,7 +1330,11 @@
         return {
             points: [fix(x1), fix(y1), fix(x2), fix(y2)],
             zoom: scale,
-            orientation: self.data.orientation
+            orientation: self.data.orientation,
+            size: {
+              width: self._originalImageWidth,
+              height: self._originalImageHeight
+            }
         };
     }
 
