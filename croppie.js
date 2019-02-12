@@ -631,7 +631,7 @@
             var delta, targetZoom;
 
             if(self.options.mouseWheelZoom === 'ctrl' && ev.ctrlKey !== true){
-              return 0; 
+              return 0;
             } else if (ev.wheelDelta) {
                 delta = ev.wheelDelta / 1200; //wheelDelta min: -120 max: 120 // max x 10 x 2
             } else if (ev.deltaY) {
@@ -1066,7 +1066,7 @@
 
         zoomer.min = fix(minZoom, 4);
         zoomer.max = fix(maxZoom, 4);
-        
+
         if (!initial && (scale < zoomer.min || scale > zoomer.max)) {
             _setZoomerVal.call(self, scale < zoomer.min ? zoomer.min : zoomer.max);
         }
@@ -1167,7 +1167,7 @@
             width = Math.min(width, self._originalImageWidth);
             height = Math.min(height, self._originalImageHeight);
         }
-    
+
         // console.table({ left, right, top, bottom, canvasWidth, canvasHeight });
         ctx.drawImage(this.elements.preview, left, top, width, height, startX, startY, canvasWidth, canvasHeight);
         if (circle) {
@@ -1425,6 +1425,13 @@
         copy = null;
     }
 
+    function _draw() {
+        var self = this,
+            canvas = self.elements.canvas;
+
+        drawCanvas(canvas, self.elements.img, self.data.orientation);
+    }
+
     function _destroy() {
         var self = this;
         self.element.removeChild(self.elements.boundary);
@@ -1569,6 +1576,9 @@
         },
         rotate: function (deg) {
             _rotate.call(this, deg);
+        },
+        draw: function () {
+            _draw.call(this);
         },
         destroy: function () {
             return _destroy.call(this);
